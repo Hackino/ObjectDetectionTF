@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">My Application</string>
+    <string name="cancel">Cancel</string>
+
+    <string name="apply">Apply</string>
+    <string name="choose_from_gallery">Choose from gallery</string>
+    <string name="selectanoption">Select an option</string>
+    <string name="take_photo">Take photo</string>
+    <string name="no_connection">No internet connection! Cannot be translated!</string>
+
 </resources>

@@ -1,4 +1,4 @@
-package com.example.myapplication.utils.extensions
+package com.example.myapplication.extensions
 
 import android.Manifest
 import android.content.Context

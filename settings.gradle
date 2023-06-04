@@ -3,6 +3,7 @@ pluginManagement {
         google()
         mavenCentral()
         gradlePluginPortal()
+        maven { url "https://maven.localazy.com/repository/release/" }
     }
 }
 dependencyResolutionManagement {
@@ -11,6 +12,7 @@ dependencyResolutionManagement {
         google()
         mavenCentral()
         maven { url 'https://jitpack.io' }
+        maven { url "https://maven.localazy.com/repository/release/" }
 
     }
 }
