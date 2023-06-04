@@ -85,23 +85,15 @@ abstract class BaseDetectorFragment:Fragment(R.layout.detector_fragment) {
         val w = mutable.width
         val paint = Paint().apply { textSize = h/15f;strokeWidth = h/85f }
         var x: Int
-        Log.e("hackino","blabladfa")
-
         scores.filter {it>0.5}.forEachIndexed{ index, fl ->
             x = index
             x *= 4
-
             if(fl > 0.5){
                 paint.color = colors[index]
                 paint.style = Paint.Style.STROKE
-                Log.e("hackino","filtering")
-
-                MainActivity.List.filter { it.name ==  labels[classes[index].toInt()] }.let {
-                    Log.e("hackino","filtered")
-
-                    Log.e("hackino","${it}")
-                    if (it.isEmpty()) {
-                        canvas.drawRect(
+                MainActivity.List?.filter { it.name ==  labels[classes[index].toInt()] && it.isChecked }?.let {
+                    if (it.isEmpty()) return@let
+                    canvas.drawRect(
                             RectF(
                                 locations[x + 1] * w,
                                 locations[x] * h,
@@ -119,7 +111,25 @@ abstract class BaseDetectorFragment:Fragment(R.layout.detector_fragment) {
                             x,
                             locations
                         )
-                    }
+                }?: kotlin.run {
+                    canvas.drawRect(
+                        RectF(
+                            locations[x + 1] * w,
+                            locations[x] * h,
+                            locations[x + 3] * w,
+                            locations[x + 2] * h
+                        ),
+                        paint
+                    )
+                    paint.style = Paint.Style.FILL
+                    canvas.setupDrawingText(
+                        labels[classes[index].toInt()],
+                        mutable,
+                        fl,
+                        paint,
+                        x,
+                        locations
+                    )
                 }
             }
         }

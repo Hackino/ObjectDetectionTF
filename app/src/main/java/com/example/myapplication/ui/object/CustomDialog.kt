@@ -23,7 +23,10 @@ class CustomDialog : DialogFragment() {
         return AlertDialog.Builder(requireContext())
             .setView(binding.root)
             .setPositiveButton(getString(R.string.apply)){dialog,_->
-                MainActivity.List = _adapter.getDataList().filter { it.isChecked }
+                _adapter.getDataList().filter { it.isChecked }.let {
+                    MainActivity.List = it.ifEmpty { null }
+                }
+
                 dialog.dismiss()
             }
             .setNegativeButton(getString(R.string.cancel)){dialog,_-> dialog.dismiss() }
@@ -37,12 +40,12 @@ class CustomDialog : DialogFragment() {
                 map { ObjectClass(it) }.also {mapped->
                     mapped.filter {it.name != "???" }.let {modelsList->
                         modelsList.forEach {outer->
-                            MainActivity.List.forEach {inner->
+                            MainActivity.List?.forEach {inner->
                                 if (outer.name == inner.name) outer.isChecked = inner.isChecked
                             }
                         }
                         modelsList
-                    }.also {result->setDataList(result)  }
+                    }.also {result->setDataList(result.sortedBy { it.name })  }
                 }
             }
         }

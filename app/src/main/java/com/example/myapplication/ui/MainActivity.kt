@@ -21,7 +21,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     companion object{
-        var List:List<ObjectClass> = emptyList()
+        var List:List<ObjectClass>? = null
     }
 
     private lateinit var navController: NavController
